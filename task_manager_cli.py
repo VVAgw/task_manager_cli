@@ -40,3 +40,35 @@ class ListTasksCommand(Command):
     def execute(self):
         print(self.obj.list_tasks())
 
+
+# класс вызывающий
+class CommandInvoker():
+    def __init__(self):
+        self.cmd = ''
+
+    def set_command(self, command:Command):
+        self.cmd = command
+
+    def execute_command(self):
+        self.cmd.execute()
+    
+# Главная функция
+def main():
+    tsk = TaskStoreAge()
+    inv = CommandInvoker()
+    addtsk = AddTaskCommand(tsk, "parapapa")
+    addts2 = AddTaskCommand(tsk, "22222parapapa")
+    addts3 = AddTaskCommand(tsk, "33333parapapa")
+    inv.set_command(addtsk)
+    inv.execute_command()
+    inv.set_command(addts2)
+    inv.execute_command()
+    inv.set_command(addts3)
+    inv.execute_command()
+
+    show_list = ListTasksCommand(tsk)
+    inv.set_command(show_list)
+    inv.execute_command()
+
+if __name__ == "__main__":
+    main()
