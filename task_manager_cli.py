@@ -1,6 +1,7 @@
 import json
+from abc import ABC, abstractmethod
 
-class TaskStore:
+class TaskStoreAge:
     def __init__(self):
         self.tasks = {}
         self.id = 1
@@ -12,4 +13,10 @@ class TaskStore:
     def list_tasks(self):
         return self.tasks
 
+class Command(ABC):
+    def __init__(self, obj:TaskStoreAge):
+        self.obj = obj
 
+    @abstractmethod
+    def execute(self, desc):
+        pass
