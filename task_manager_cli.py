@@ -19,7 +19,7 @@ class TaskStoreAge:
         return del_task
 
     def add_task_with_id(self, task_id, description):
-        return ''
+        self.tasks[task_id] = description
 
 # Абстрактный класс, выступает в роли шаблона
 class Command(ABC):
@@ -30,6 +30,19 @@ class Command(ABC):
     def execute(self):
         pass
  
+class CompleteTaskCommand(Command):
+    def __init__(self, obj:TaskStoreAge, task_id):
+        super().__init__(obj)
+        self.task_id = task_id
+        self.completed_description = ''
+        
+    def execute(self):
+        res = self.obj.complete_task(self.task_id)
+        self.completed_description = res
+
+    def undo(self):
+        self.obj.add_task_with_id(self.task_id, self.completed_description)
+
 # Класс добавления задачи
 class AddTaskCommand(Command):
     def __init__(self, obj:TaskStoreAge, desc):
