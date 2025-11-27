@@ -14,6 +14,13 @@ class TaskStoreAge:
     def list_tasks(self):
         return self.tasks
 
+    def complete_task(self,task_id):
+        del_task = self.tasks.pop(task_id)
+        return del_task
+
+    def add_task_with_id(self, task_id, description):
+        return ''
+
 # Абстрактный класс, выступает в роли шаблона
 class Command(ABC):
     def __init__(self, obj:TaskStoreAge):
