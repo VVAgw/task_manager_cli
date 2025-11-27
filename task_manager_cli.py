@@ -86,6 +86,10 @@ def main():
     inv.set_command(addts3)
     inv.execute_command()
 
+    deltask = CompleteTaskCommand(tsk, 2)
+    inv.set_command(deltask)
+    inv.execute_command()
+
     show_list = ListTasksCommand(tsk)
     inv.set_command(show_list)
     inv.execute_command()
