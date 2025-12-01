@@ -1,7 +1,7 @@
 import json
 from abc import ABC, abstractmethod
 
-# Класс хранителя
+#####----->1   Класс хранителя
 class TaskStoreAge:
     def __init__(self):
         self.tasks = {}
@@ -21,7 +21,7 @@ class TaskStoreAge:
     def add_task_with_id(self, task_id, description):
         self.tasks[task_id] = description
 
-# Абстрактный класс, выступает в роли шаблона
+#####----->2   Абстрактный класс, выступает в роли шаблона
 class Command(ABC):
     def __init__(self, obj:TaskStoreAge):
         self.obj = obj
@@ -29,7 +29,8 @@ class Command(ABC):
     @abstractmethod
     def execute(self):
         pass
- 
+
+#####----->3   Задача выполнена 
 class CompleteTaskCommand(Command):
     def __init__(self, obj:TaskStoreAge, task_id):
         super().__init__(obj)
@@ -43,7 +44,7 @@ class CompleteTaskCommand(Command):
     def undo(self):
         self.obj.add_task_with_id(self.task_id, self.completed_description)
 
-# Класс добавления задачи
+#####----->4   Класс добавления задачи
 class AddTaskCommand(Command):
     def __init__(self, obj:TaskStoreAge, desc):
         super().__init__(obj)
@@ -52,7 +53,7 @@ class AddTaskCommand(Command):
     def execute(self):
         self.obj.add_task(self.desc)
 
-# Класс вывода списка задачь
+#####----->5   Класс вывода списка задачь
 class ListTasksCommand(Command):
     def __init__(self, obj:TaskStoreAge):
         super().__init__(obj)
@@ -61,7 +62,7 @@ class ListTasksCommand(Command):
         print(self.obj.list_tasks())
 
 
-# класс вызывающий
+#####----->6   класс вызывающий
 class CommandInvoker():
     def __init__(self):
         self.cmd = ''
