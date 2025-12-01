@@ -9,7 +9,9 @@ class TaskStoreAge:
 
     def add_task(self, desc):
         self.tasks[self.id] = desc
+        id = self.id
         self.id += 1
+        return id
 
     def list_tasks(self):
         return self.tasks
